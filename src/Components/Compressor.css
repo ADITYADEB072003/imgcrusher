@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+/* ───────────────────────────── */
+/* DESIGN TOKENS */
+/* ───────────────────────────── */
+
+:root {
+  --bg: #f5f5f7;
+  --card-bg: rgba(255,255,255,0.65);
+  --border: rgba(0,0,0,0.06);
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --blue: #0071e3;
+  --blue-hover: #005ecb;
+
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  --transition: 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* ───────────────────────────── */
+/* RESET */
+/* ───────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ───────────────────────────── */
+/* BODY */
+/* ───────────────────────────── */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Helvetica Neue", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* soft Apple ambient glow */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, #ffffff 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, #e9e9ee 0%, transparent 50%);
+  z-index: -1;
+}
+
+/* ───────────────────────────── */
+/* APP CONTAINER */
+/* ───────────────────────────── */
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 32px 80px;
+}
+
+/* ───────────────────────────── */
+/* macOS WINDOW BAR */
+/* ───────────────────────────── */
+
+.mac-window {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  margin-bottom: 40px;
+}
+
+.traffic-lights {
+  display: flex;
+  gap: 8px;
+}
+
+.traffic-lights span {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+
+.red { background: #ff5f57; }
+.yellow { background: #ffbd2e; }
+.green { background: #28c840; }
+
+/* ───────────────────────────── */
+/* HEADER */
+/* ───────────────────────────── */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 70px;
+  gap: 20px;
+  animation: fadeInHeader 0.8s ease forwards;
+}
+
+.header-text {
+  max-width: 650px;
+}
+
+.header h2 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  background: linear-gradient(90deg, #1d1d1f, #6e6e73);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header p {
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.history-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.05);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.history-toggle:hover {
+  background: rgba(0,0,0,0.1);
+  transform: scale(1.08);
+}
+
+/* ───────────────────────────── */
+/* MAIN GRID */
+/* ───────────────────────────── */
+
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+/* ───────────────────────────── */
+/* CARD – Frosted Apple Glass */
+/* ───────────────────────────── */
+
+.card {
+  padding: 30px;
+  border-radius: var(--radius-xl);
+  background: var(--card-bg);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.08),
+    inset 0 1px rgba(255,255,255,0.6);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.12),
+    inset 0 1px rgba(255,255,255,0.8);
+}
+
+.card h4 {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* ───────────────────────────── */
+/* IMAGE */
+/* ───────────────────────────── */
+
+.card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.card img:hover {
+  transform: scale(1.02);
+}
+
+/* ───────────────────────────── */
+/* INPUTS */
+/* ───────────────────────────── */
+
+.card input[type="file"] {
+  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  background: white;
+}
+
+/* slider */
+
+.card input[type="range"] {
+  width: 100%;
+  height: 4px;
+  background: #d2d2d7;
+  border-radius: 100px;
+  outline: none;
+}
+
+.card input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.card input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+/* ───────────────────────────── */
+/* TEXT BOX */
+/* ───────────────────────────── */
+
+.card p {
+  font-size: 0.9rem;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.03);
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ───────────────────────────── */
+/* BUTTONS */
+/* ───────────────────────────── */
+
+button {
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button:not(.danger) {
+  background: var(--blue);
+  color: white;
+}
+
+button:not(.danger):hover {
+  background: var(--blue-hover);
+  transform: translateY(-2px);
+}
+
+button.danger {
+  background: rgba(0,0,0,0.06);
+  color: var(--text);
+}
+
+button.danger:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+/* ───────────────────────────── */
+/* HISTORY PANEL */
+/* ───────────────────────────── */
+
+.history-panel {
+  position: fixed;
+  top: 0;
+  right: -380px;
+  width: 360px;
+  height: 100vh;
+  padding: 40px 28px;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(30px);
+  border-left: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.history-panel.show {
+  right: 0;
+}
+
+.history-item {
+  padding: 14px;
+  border-radius: var(--radius-md);
+  background: rgba(0,0,0,0.04);
+  margin-bottom: 12px;
+  transition: var(--transition);
+}
+
+.history-item:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+/* ───────────────────────────── */
+/* ANIMATION */
+/* ───────────────────────────── */
+
+@keyframes fadeInHeader {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ───────────────────────────── */
+/* RESPONSIVE */
+/* ───────────────────────────── */
+
+@media (max-width: 1024px) {
+  .main-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .history-panel {
+    width: 100%;
+  }
+
+  .app-container {
+    padding: 40px 20px 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h2 {
+    font-size: 1.8rem;
+  }
+
+  .header p {
+    font-size: 0.95rem;
+  }
+}
